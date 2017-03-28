@@ -59,7 +59,7 @@ public class Tags {
         //       adventure
         //       (join movies and tags, filter by genres (like), groupby tag and
         //        aggregate count)
-        Dataset<Row> tagPerMovie  =  movies.filter(movies.col("genres").like("%Thriller%").or(movies.col("genres").like("%adventure%"))).join(tags,tags.col("movieId").equalTo(movies.col("movieId"))).groupBy("tag").count().coalesce(5);
+        Dataset<Row> tagPerMovie  =  movies.filter(movies.col("genres").like("%Thriller%").or(movies.col("genres").like("%adventure%"))).join(tags,tags.col("movieId").equalTo(movies.col("movieId"))).groupBy("tag").count();
 
         
         tagPerMovie.write().format("json").save(outputPath+"/tags");
